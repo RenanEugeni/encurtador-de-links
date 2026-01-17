@@ -2,7 +2,6 @@ package com.linkcurto.encurtadorDeLinks.linkservice;
 
 
 import java.net.URL;
-import java.util.Base64;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -34,9 +33,9 @@ public class LinkService {
     }
 
     public LinkModel createShortLink(LinkModel link){
-        String code = Base64.getEncoder().encodeToString(link.getOriginalLink().getBytes());
+        int code = link.getOriginalLink().hashCode();
 
-        link.setShortLink(code);
+        link.setShortLink(Integer.toString(code));
 
         return link;
     }
