@@ -50,14 +50,14 @@ Essa separação facilita manutenção, testes e evolução do projeto.
 POST
 json
 {
-  "originalUrl": "http://exemplo.com"
+  "originalUrl": "http://exemp\lo.com"
 }
 
 Resposta
 json
 {
     "id": 1,
-    "originalLink": "http://exemplo.com",
+    "originalLink": "http://exemp\lo.com",
     "shortLink": "12345678290"
 }
 
