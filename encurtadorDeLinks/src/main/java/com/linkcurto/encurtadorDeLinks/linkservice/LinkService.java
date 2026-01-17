@@ -31,7 +31,7 @@ public class LinkService {
     }
 
     public LinkModel shortLinkProcces(String originalUrl){
-        if(originalUrl == "" || originalUrl == null){
+        if(originalUrl.isEmpty()|| originalUrl == null){
             throw new IllegalArgumentException("Input invalido");
         }
         LinkModel link = new LinkModel();
