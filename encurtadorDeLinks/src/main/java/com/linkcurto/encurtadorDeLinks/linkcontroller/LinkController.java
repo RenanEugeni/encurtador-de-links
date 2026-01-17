@@ -37,11 +37,11 @@ public class LinkController {
     }
 
     @GetMapping("/{code}")
-    public void redirect(@PathVariable("code") String shortUrl){
+    public ResponseEntity redirect(@PathVariable("code") String shortUrl){
 
         LinkModel link = linkService.getOriginalLink(shortUrl);
 
-        ResponseEntity.status(HttpStatus.FOUND).location(URI.create(link.getOriginalLink()));
+        return ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create(link.getOriginalLink())).build();
 
     }
     
