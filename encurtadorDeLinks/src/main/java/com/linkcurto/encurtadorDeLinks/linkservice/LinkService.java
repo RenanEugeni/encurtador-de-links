@@ -24,7 +24,7 @@ public class LinkService {
 
     public LinkModel createShortLink(LinkModel link){
         int code = link.getOriginalLink().hashCode();
-
+        code = Math.abs(code);
         link.setShortLink(Integer.toString(code));
 
         return link;
