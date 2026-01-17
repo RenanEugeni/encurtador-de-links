@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.linkcurto.encurtadorDeLinks.dto.CreateLinkRequest;
 import com.linkcurto.encurtadorDeLinks.linkmodel.LinkModel;
 import com.linkcurto.encurtadorDeLinks.linkservice.LinkService;
 
@@ -23,9 +24,9 @@ public class LinkController {
     @Autowired
     private LinkService linkService;
 
-    @PostMapping
-    public ResponseEntity<LinkModel> generateNewLink(@RequestBody String originalUrl){
-        LinkModel link = linkService.shortLinkProcces(originalUrl);
+    @PostMapping()
+    public ResponseEntity<LinkModel> generateNewLink(@RequestBody CreateLinkRequest request){
+        LinkModel link = linkService.shortLinkProcces(request.getOriginalUrl());
         return ResponseEntity.status(HttpStatus.CREATED).body(link);
         
     }
@@ -36,7 +37,7 @@ public class LinkController {
     }
 
     @GetMapping("/{code}")
-    public void redirect(@PathVariable String shortUrl){
+    public void redirect(@PathVariable("code") String shortUrl){
 
         LinkModel link = linkService.getOriginalLink(shortUrl);
 
