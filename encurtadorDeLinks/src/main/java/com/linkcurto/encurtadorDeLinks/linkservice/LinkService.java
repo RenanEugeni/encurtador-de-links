@@ -1,12 +1,14 @@
 package com.linkcurto.encurtadorDeLinks.linkservice;
 
 
-import com.linkcurto.encurtadorDeLinks.linkmodel.LinkModel;
-import com.linkcurto.encurtadorDeLinks.linkrepository.LinkRepository;
-import org.springframework.stereotype.Service;
-
 import java.net.URL;
 import java.util.Base64;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.linkcurto.encurtadorDeLinks.linkmodel.LinkModel;
+import com.linkcurto.encurtadorDeLinks.linkrepository.LinkRepository;
 
 @Service
 public class LinkService {
@@ -16,9 +18,8 @@ public class LinkService {
         this.repository = linkrepository;
     }
 
-    public LinkModel saveNewLink(LinkModel link){
-        repository.save(link);
-        return link;
+    public LinkModel saveLink(LinkModel link){
+        return repository.save(link);
     }
 
     public boolean isValid(LinkModel link){
@@ -40,6 +41,22 @@ public class LinkService {
         return link;
     }
 
-    @
+    public LinkModel shortLinkProcces(String originalUrl){
+        LinkModel link = new LinkModel();
+        link.setOriginalLink(originalUrl);
+
+        /*if(!isValid(link)){
+            throw new IllegalArgumentException("Link Invalido!");
+        }*/
+
+        createShortLink(link);
+        saveLink(link);
+
+        return link;
+    }
+
+    public List<LinkModel> getAllLinks(){
+        return repository.findAll();
+    }
 
 }
