@@ -1,7 +1,6 @@
 package com.linkcurto.encurtadorDeLinks.linkservice;
 
 
-import java.net.URL;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -21,16 +20,6 @@ public class LinkService {
         return repository.save(link);
     }
 
-    public boolean isValid(LinkModel link){
-        try{
-            URL url = new URL(link.getOriginalLink());
-
-            url.toURI();
-            return true;
-        } catch (Exception e){
-            return false;
-        }
-    }
 
     public LinkModel createShortLink(LinkModel link){
         int code = link.getOriginalLink().hashCode();
@@ -43,10 +32,6 @@ public class LinkService {
     public LinkModel shortLinkProcces(String originalUrl){
         LinkModel link = new LinkModel();
         link.setOriginalLink(originalUrl);
-
-        /*if(!isValid(link)){
-            throw new IllegalArgumentException("Link Invalido!");
-        }*/
 
         createShortLink(link);
         saveLink(link);
